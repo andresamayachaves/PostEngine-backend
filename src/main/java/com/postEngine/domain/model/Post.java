@@ -1,16 +1,18 @@
 package com.postEngine.domain.model;
 
+import com.postEngine.domain.service.PostService;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name="Post")
 @Table(name = "post")
 @Data
 public class Post {
+
+    PostService postService = new PostService();
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "postID", nullable = false)
@@ -23,22 +25,23 @@ public class Post {
     private String content;
 
     @Column(name = "number_of_likes", nullable = false, length = 45)
-    private String numberOfLikes;
+    private Integer numberOfLikes;
 
     @ManyToMany
-    private Set<UserLike> userLikes = new LinkedHashSet<>();
+    private List<UserLike> userLikes = new ArrayList<>();
 
     //@OneToMany(mappedBy =  "post_id_post")
-    //jjjjjjjjjjjjjjj
-
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
-    private Set<Comment> comments = new LinkedHashSet<>();
+    private static List<Comment> comments = new ArrayList<>();
 
-
+    public void deleteComment(Integer targetCommentId) {
+        comments.remove(targetCommentId);
+        postService.deleteComment(comments.get(targetCommentId));
+    }
     //Getters and setters
     public Integer getId() {
         return id;
@@ -64,19 +67,29 @@ public class Post {
         this.content = content;
     }
 
-    public String getNumberOfLikes() {
+    public Integer getNumberOfLikes() {
         return numberOfLikes;
     }
 
-    public void setNumberOfLikes(String numberOfLikes) {
+    public void setNumberOfLikes(Integer numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
-    public Collection<Object> getComments() {
-        return null; //toDo method
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void addComment(Comment comment) {
-        //todo
+    public void setAll(Integer newId, String newTitle,
+                       String newContent, Integer newNumberOfLikes,
+                       List<UserLike> newListUserLikes){
+        setId(newId);
+        setTitle(newTitle);
+        setContent(newContent);
+        setNumberOfLikes(newNumberOfLikes);
+    }
+
+
+    public static void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

@@ -54,8 +54,19 @@ public class PostService implements  PostServiceInterface {
         return postRepository.findAll();
     }
 
+
+    public List<Comment> findAllComments(Post post) {
+        Post postToRetrieve = postRepository.findById(post.getId()).get();
+        return postToRetrieve.getComments();
+    }
+
     public void updatePost(Post post) {
-        //todo
+        Post postToUpdate = postRepository.findById(post.getId()).get();
+        postToUpdate.setAll(postToUpdate.getId(),
+                postToUpdate.getTitle(),
+                postToUpdate.getContent(),
+                postToUpdate.getNumberOfLikes(),
+                postToUpdate.getUserLikes());
     }
 }
 

@@ -30,6 +30,11 @@ public class PostController {
         return postService.createPost(post);
     }
 
+    @GetMapping("get/all/comments")
+    public List<Post> getAllComments(){
+        return  postService.findAllPosts() ; // CommentService.findAllComments();
+    }
+
     @PostMapping ("update/post")    // todo, correct annotation?
     public void updatePost(@RequestBody Post post){
         postService.updatePost(post);

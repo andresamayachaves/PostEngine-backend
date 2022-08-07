@@ -21,7 +21,7 @@ public class Comment {
     private String content;
 
     @Column(name = "number_of_likes", length = 45)
-    private String numberOfLikes;
+    private Long numberOfLikes;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_postID", nullable = false)
@@ -31,12 +31,11 @@ public class Comment {
     private List<UserLike> userLikes = new ArrayList<UserLike>() ;
 
     public Integer getFK_post_id(){
-        return null; //todo
-
+        return postIdPost.getId();
     }
 
     public void  commentSelfDestruct(){
-        CommentService.DeleteComment();
+        CommentService.deleteComment(id);
     }
 
 //Getters & setters
@@ -56,11 +55,11 @@ public class Comment {
         this.content = content;
     }
 
-    public String getNumberOfLikes() {
+    public Long getNumberOfLikes() {
         return numberOfLikes;
     }
 
-    public void setNumberOfLikes(String numberOfLikes) {
+    public void setNumberOfLikes(Long  numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
