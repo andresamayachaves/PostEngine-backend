@@ -1,5 +1,6 @@
 package com.postEngine.domain.model;
 
+import com.postEngine.domain.service.CommentService;
 import com.postEngine.domain.service.PostService;
 import lombok.Data;
 
@@ -79,17 +80,28 @@ public class Post {
         return comments;
     }
 
+    public static void setComments(List<Comment> comments) {
+        Post.comments = comments;
+    }
+
     public void setAll(Integer newId, String newTitle,
                        String newContent, Integer newNumberOfLikes,
+                       List <Comment> newListComments,
                        List<UserLike> newListUserLikes){
         setId(newId);
         setTitle(newTitle);
         setContent(newContent);
         setNumberOfLikes(newNumberOfLikes);
+        setUserLikes(newListUserLikes);
+        setComments(newListComments);
     }
 
 
     public static void addComment(Comment comment) {
         comments.add(comment);
+    }
+
+    public void  postSelfDestruct(){
+        postService.deletePost(this);
     }
 }

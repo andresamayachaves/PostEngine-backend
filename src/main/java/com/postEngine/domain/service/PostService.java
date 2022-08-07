@@ -1,5 +1,6 @@
 package com.postEngine.domain.service;
 
+import com.postEngine.domain.mappers.PostDTOMapper;
 import com.postEngine.domain.model.Comment;
 import com.postEngine.domain.model.Post;
 import com.postEngine.repository.CommentRepository;
@@ -19,6 +20,9 @@ public class PostService implements  PostServiceInterface {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private PostDTOMapper postDTOMapper;
+
 
     @Override
     public Post createPost(Post post){
@@ -34,32 +38,6 @@ public class PostService implements  PostServiceInterface {
         return comment;
     }
 
-    @Override
-    public void deleteComment(Comment comment){
-        comment.commentSelfDestruct();
-    }
-
-    @Override
-    public void deletePost(Post post){
-        Post postToDelete = postRepository.findById(post.getId()).get();
-        /*if(postToDelete.getComments().size() >= 0){
-            postToDelete.getComments().forEach(comment->
-                    commentRepository.deleteById(comment.getId()));
-        }
-        postRepository.deleteById(post.getId());*/
-    }
-
-    //@Override
-    public List<Post> findAllPosts() {
-        return postRepository.findAll();
-    }
-
-
-    public List<Comment> findAllComments(Post post) {
-        Post postToRetrieve = postRepository.findById(post.getId()).get();
-        return postToRetrieve.getComments();
-    }
-
     public void updatePost(Post post) {
         Post postToUpdate = postRepository.findById(post.getId()).get();
         postToUpdate.setAll(postToUpdate.getId(),
@@ -67,6 +45,32 @@ public class PostService implements  PostServiceInterface {
                 postToUpdate.getContent(),
                 postToUpdate.getNumberOfLikes(),
                 postToUpdate.getUserLikes());
+    }
+    @Override
+    public void deletePost(Post post){
+        Post postToDelete = postRepository.findById(post.getId()).get();
+        if(postToDelete.getComments().size() >= 0){
+            postToDelete.getComments().forEach(comment->
+                    commentRepository.deleteById(comment.getId()));
+        }
+        postRepository.deleteById(post.getId());
+    }
+
+    @Override
+    public void deleteComment(Comment comment){
+        comment.commentSelfDestruct();
+    }
+
+    //@Override
+    public List<PostDTO> findAllPosts() {
+        return postRepository.findAll().stream()
+                .map(postDTOMapper::postToDto).toList();
+    }
+
+
+    public List<Comment> findAllComments(Post post) {
+        Post postToRetrieve = postRepository.findById(post.getId()).get();
+        return postToRetrieve.getComments();
     }
 }
 

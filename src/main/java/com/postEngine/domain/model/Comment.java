@@ -35,7 +35,7 @@ public class Comment {
     }
 
     public void  commentSelfDestruct(){
-        CommentService.deleteComment(id);
+        CommentService.deleteComment(this);
     }
 
 //Getters & setters

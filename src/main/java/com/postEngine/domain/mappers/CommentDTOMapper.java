@@ -7,4 +7,8 @@ public class CommentDTOMapper {
     public static Comment dtoToComment(CommentDto comment) {
         return null; //todo
     }
+
+    public static CommentDto commentToDto(Comment comment) {
+        return null;  //todo
+    }
 }

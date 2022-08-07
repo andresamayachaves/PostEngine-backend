@@ -30,6 +30,10 @@ public class CommentService {
         targetComment.setContent(commentUpdated.getContent());
         targetComment.setContent(commentUpdated.getContent());
     }
+    public static void deleteComment(Comment commentToDelete) {
+
+    }
+
 
     public void oneLike(Comment commentLiked, Boolean moreLess){   //True: 1 like more; False: 1 like less
         int decide = 0;
