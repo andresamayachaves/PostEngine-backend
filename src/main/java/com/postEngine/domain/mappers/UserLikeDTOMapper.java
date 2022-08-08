@@ -4,7 +4,9 @@ import com.postEngine.domain.dto.CommentDto;
 import com.postEngine.domain.dto.UserLikeDto;
 import com.postEngine.domain.model.Comment;
 import com.postEngine.domain.model.UserLike;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserLikeDTOMapper {
 
     public static UserLikeDto userLikeToDto(UserLike userLike) {

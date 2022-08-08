@@ -3,23 +3,18 @@ package com.postEngine.domain.controller;
 import com.postEngine.domain.dto.PostDto;
 import com.postEngine.domain.model.Post;
 import com.postEngine.domain.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/post")
 public class PostController {
 
-    @Autowired
     private PostService postService;
-
-    //Constructor
-    @Autowired
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
 
    @GetMapping("get/all/posts")
     public List<PostDto> getAllPosts(){

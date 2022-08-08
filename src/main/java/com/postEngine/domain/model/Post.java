@@ -12,7 +12,6 @@ import java.util.*;
 @Data
 public class Post {
 
-    PostService postService = new PostService();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +24,7 @@ public class Post {
     @Column(name = "content", nullable = false, length = 45)
     private String content;
 
-    @Column(name = "number_of_likes", nullable = false, length = 45)
+    @Column(name = "number_of_likes", nullable = false)
     private Integer numberOfLikes;
 
     @ManyToMany
@@ -39,10 +38,6 @@ public class Post {
     )
     private static List<Comment> comments = new ArrayList<>();
 
-    public void deleteComment(Integer targetCommentId) {
-        comments.remove(targetCommentId);
-        postService.deleteComment(comments.get(targetCommentId));
-    }
     //Getters and setters
     public Integer getId() {
         return id;
@@ -99,9 +94,5 @@ public class Post {
 
     public static void addComment(Comment comment) {
         comments.add(comment);
-    }
-
-    public void  postSelfDestruct(){
-        postService.deletePost(this);
     }
 }

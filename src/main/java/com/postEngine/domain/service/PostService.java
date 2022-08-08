@@ -6,21 +6,21 @@ import com.postEngine.domain.model.Comment;
 import com.postEngine.domain.model.Post;
 import com.postEngine.repository.CommentRepository;
 import com.postEngine.repository.PostRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class PostService implements  PostServiceInterface {
 
-    @Autowired
+
     private PostRepository postRepository;
 
-    @Autowired
     private CommentRepository commentRepository;
 
-    @Autowired
     private PostDTOMapper postDTOMapper;
 
 
@@ -73,5 +73,6 @@ public class PostService implements  PostServiceInterface {
         Post postToRetrieve = postRepository.findById(post.getId()).get();
         return postToRetrieve.getComments();
     }
+
 }
 

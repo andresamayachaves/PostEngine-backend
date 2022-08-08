@@ -2,7 +2,9 @@ package com.postEngine.domain.mappers;
 
 import com.postEngine.domain.dto.PostDto;
 import com.postEngine.domain.model.Post;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PostDTOMapper {
 
     public PostDto postToDto(Post post) {
