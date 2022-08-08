@@ -1,5 +1,6 @@
 package com.postEngine.domain.service;
 
+import com.postEngine.domain.dto.PostDto;
 import com.postEngine.domain.mappers.PostDTOMapper;
 import com.postEngine.domain.model.Comment;
 import com.postEngine.domain.model.Post;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class PostService implements  PostServiceInterface {
@@ -44,6 +44,7 @@ public class PostService implements  PostServiceInterface {
                 postToUpdate.getTitle(),
                 postToUpdate.getContent(),
                 postToUpdate.getNumberOfLikes(),
+                postToUpdate.getComments(),
                 postToUpdate.getUserLikes());
     }
     @Override
@@ -61,8 +62,8 @@ public class PostService implements  PostServiceInterface {
         comment.commentSelfDestruct();
     }
 
-    //@Override
-    public List<PostDTO> findAllPosts() {
+    @Override
+    public List<PostDto> findAllPosts() {
         return postRepository.findAll().stream()
                 .map(postDTOMapper::postToDto).toList();
     }

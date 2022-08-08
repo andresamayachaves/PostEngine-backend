@@ -41,7 +41,7 @@ public class PostDto{
         this.numberOfLikes = number_of_likes;
     }
 
-    public List<UserLikeDto> getUser_likes() {
+    public List<UserLikeDto> getUsersLikes() {
         return user_likes;
     }
 
@@ -57,7 +57,4 @@ public class PostDto{
         this.comments = comments;
     }
 
-    public List<UserLike> getUserLikes() {
-        return null;
-    }
 }

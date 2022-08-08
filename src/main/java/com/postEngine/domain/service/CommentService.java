@@ -1,6 +1,5 @@
 package com.postEngine.domain.service;
 
-import com.postEngine.domain.controller.CommentController;
 import com.postEngine.domain.dto.CommentDto;
 import com.postEngine.domain.mappers.CommentDTOMapper;
 import com.postEngine.domain.model.Comment;
@@ -21,10 +20,13 @@ public class CommentService {
         Comment commentAsEntity = CommentDTOMapper.dtoToComment (comment);
         commentRepo.save(commentAsEntity);
         Post.addComment(commentAsEntity);
-        return commentAsEntity; //todo review return
+        return commentAsEntity;
 
     }
 
+    public List<Comment>  getAllComments( ) {
+        return commentRepo.findAll();
+    }
     public void updateComment(CommentDto commentUpdated) {
         Comment targetComment = commentRepo.getReferenceById(commentUpdated.getId());
         targetComment.setContent(commentUpdated.getContent());

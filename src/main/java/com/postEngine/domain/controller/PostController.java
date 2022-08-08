@@ -1,5 +1,6 @@
 package com.postEngine.domain.controller;
 
+import com.postEngine.domain.dto.PostDto;
 import com.postEngine.domain.model.Post;
 import com.postEngine.domain.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping
-    public List<Post> getAllPosts(){
+   @GetMapping("get/all/posts")
+    public List<PostDto> getAllPosts(){
         return postService.findAllPosts();
     }
 
@@ -31,7 +32,7 @@ public class PostController {
     }
 
     @GetMapping("get/all/comments")
-    public List<Post> getAllComments(){
+    public List<PostDto> getAllComments(){
         return  postService.findAllPosts() ; // CommentService.findAllComments();
     }
 

@@ -1,6 +1,7 @@
 package com.postEngine.domain.controller;
 
 import com.postEngine.domain.dto.CommentDto;
+import com.postEngine.domain.mappers.CommentDTOMapper;
 import com.postEngine.domain.model.Comment;
 import com.postEngine.domain.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class CommentController {
         commentService.createComment(comment);
     }
 
+    @PostMapping("get/all/comments")
+    public List<Comment> getAllComments(){
+        return commentService.getAllComments();
+    }
+
     @PostMapping("update/comment")     // todo, correct annotation?
     public void updatePost(@RequestBody CommentDto comment){
         commentService.updateComment(comment);
@@ -33,7 +39,7 @@ public class CommentController {
 
     @DeleteMapping("delete/comment")
     public void deletePost(@RequestBody CommentDto comment){
-        commentService.deleteComment(comment.getId());
+        commentService.deleteComment(CommentDTOMapper.dtoToComment(comment));
     }
 
 

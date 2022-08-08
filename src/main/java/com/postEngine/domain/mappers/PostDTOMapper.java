@@ -27,8 +27,8 @@ public class PostDTOMapper {
         post.setNumberOfLikes(postDto.getNumberOfLikes());
         post.setComments(
                 postDto.getComments().stream().map(CommentDTOMapper::dtoToComment).toList());
-        post.setUserLikes(
-                postDto.getUserLikes().stream().map(UserLikeDTOMapper::dtoToUserLike).toList());
+       post.setUserLikes(
+                postDto.getUsersLikes().stream().map(UserLikeDTOMapper::dtoToUserLike).toList());
 
         return post;
     }
