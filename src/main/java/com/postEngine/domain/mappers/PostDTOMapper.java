@@ -30,6 +30,7 @@ public class PostDTOMapper {
         post.setUserLikes(
                 postDto.getUserLikes().stream().map(UserLikeDTOMapper::dtoToUserLike).toList());
 
+        return post;
     }
 
 }

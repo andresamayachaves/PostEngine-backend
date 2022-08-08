@@ -7,8 +7,8 @@ import java.util.List;
 public class CommentDto {
     private Integer id;
     private String content;
-    private Integer number_of_likes;
-    private List<UserLike> users_likes;
+    private Integer numberOfLikes;
+    private List<UserLikeDto> usersLikes;
 
     public Integer getId() {
         return id;
@@ -26,19 +26,19 @@ public class CommentDto {
         this.content = content;
     }
 
-    public Integer getNumber_of_likes() {
-        return number_of_likes;
+    public Integer getNumberOfLikes() {
+        return numberOfLikes;
     }
 
-    public void setNumber_of_likes(Integer number_of_likes) {
-        this.number_of_likes = number_of_likes;
+    public void setNumberOfLikes(Integer numberOfLikes) {
+        this.numberOfLikes = numberOfLikes;
     }
 
-    public List<UserLike> getUsers_likes() {
-        return users_likes;
+    public List<UserLikeDto> getUsersLikes() {
+        return usersLikes;
     }
 
-    public void setUsers_likes(List<UserLike> users_likes) {
-        this.users_likes = users_likes;
+    public void setUsersLikes(List<UserLikeDto> usersLikes) {
+        this.usersLikes = usersLikes;
     }
 }

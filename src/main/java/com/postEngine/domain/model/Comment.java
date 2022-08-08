@@ -20,15 +20,15 @@ public class Comment {
     @Column(name = "content", length = 45)
     private String content;
 
-    @Column(name = "number_of_likes", length = 45)
-    private Long numberOfLikes;
+    @Column(name = "numberOfLikes", length = 45)
+    private Integer numberOfLikes;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_postID", nullable = false)
     private Post postIdPost;
 
     @ManyToMany
-    private List<UserLike> userLikes = new ArrayList<UserLike>() ;
+    private List<UserLike> usersLikes = new ArrayList<UserLike>() ;
 
     public Integer getFK_post_id(){
         return postIdPost.getId();
@@ -55,11 +55,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Long getNumberOfLikes() {
+    public Integer getNumberOfLikes() {
         return numberOfLikes;
     }
 
-    public void setNumberOfLikes(Long  numberOfLikes) {
+    public void setNumberOfLikes(Integer  numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
@@ -69,5 +69,13 @@ public class Comment {
 
     public void setPostIdPost(Post postIdPost) {
         this.postIdPost = postIdPost;
+    }
+
+
+    public void setUsersLikes(List<UserLike> usersLikes) {
+        this.usersLikes = usersLikes;
+    }
+    public List<UserLike> getUsersLikes() {
+        return usersLikes;
     }
 }
