@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/post")
@@ -21,6 +22,7 @@ public class PostController {
         return postService.findAllPosts();
     }
 
+
     @PostMapping ("create/post")
     public Post createPost(@RequestBody Post post){
         return postService.createPost(post);
@@ -31,10 +33,12 @@ public class PostController {
         return  postService.findAllPosts() ; // CommentService.findAllComments();
     }
 
-    @PostMapping ("update/post")    // todo, correct annotation?
+    @PutMapping ("edit/post")    // todo, correct annotation?
     public void updatePost(@RequestBody Post post){
         postService.updatePost(post);
     }
+
+
 
     @DeleteMapping("delete/post")
     public void deletePost(@RequestBody Post post){

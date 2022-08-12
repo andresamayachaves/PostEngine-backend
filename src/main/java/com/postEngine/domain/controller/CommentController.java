@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(path = "api/comment")
 public class CommentController {
@@ -27,12 +28,12 @@ public class CommentController {
         commentService.createComment(comment);
     }
 
-    @PostMapping("get/all/comments")
+    @GetMapping("get/all/comments")
     public List<Comment> getAllComments(){
         return commentService.getAllComments();
     }
 
-    @PostMapping("update/comment")     // todo, correct annotation?
+    @PutMapping("edit/comment")     // todo, correct annotation?
     public void updatePost(@RequestBody CommentDto comment){
         commentService.updateComment(comment);
     }
